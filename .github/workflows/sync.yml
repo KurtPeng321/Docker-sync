@@ -8,11 +8,13 @@ jobs:
       - name: Login to Aliyun ACR
         uses: docker/login-action@v3
         with:
-          registry: registry.cn-shenzhen.aliyuncs.com
+          # 这里只填域名，不要带后面的 /mirotalk-space/sfu
+          registry: crpi-qv9dv9mminlvtv8h.cn-shenzhen.personal.cr.aliyuncs.com
           username: ${{ secrets.ALIYUN_USERNAME }}
           password: ${{ secrets.ALIYUN_PASSWORD }}
       - name: Pull and Tag
         run: |
           docker pull mirotalk/sfu:latest
-          docker tag mirotalk/sfu:latest registry.cn-shenzhen.aliyuncs.com/mirotalk-space/sfu:latest
-          docker push registry.cn-shenzhen.aliyuncs.com/mirotalk-space/sfu:latest
+          # 这里填完整路径：域名/命名空间/仓库名
+          docker tag mirotalk/sfu:latest crpi-qv9dv9mminlvtv8h.cn-shenzhen.personal.cr.aliyuncs.com/mirotalk-space/sfu:latest
+          docker push crpi-qv9dv9mminlvtv8h.cn-shenzhen.personal.cr.aliyuncs.com/mirotalk-space/sfu:latest
